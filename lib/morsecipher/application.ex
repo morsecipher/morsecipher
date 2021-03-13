@@ -14,9 +14,11 @@ defmodule Morsecipher.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Morsecipher.PubSub},
       # Start the Endpoint (http/https)
-      MorsecipherWeb.Endpoint
+      MorsecipherWeb.Endpoint,
       # Start a worker by calling: Morsecipher.Worker.start_link(arg)
       # {Morsecipher.Worker, arg}
+      Morsecipher.Queue,
+      Morsecipher.QueuePoller
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

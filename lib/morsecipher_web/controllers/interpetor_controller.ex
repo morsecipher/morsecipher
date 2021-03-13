@@ -13,10 +13,9 @@ defmodule MorsecipherWeb.InterpetorController do
     json conn, %{ status: :ok, text: output }
   end
   def create(conn, params) do
-    Task.async(fn() ->
-      Morseficator.Adapter.interpret(params["text"], Morseficator.Adapter.Midi)
-    end)
+    GenServer.whereis(Morsecipher.Queue)
+    |> Morsecipher.Queue.add(params["text"])
 
-    json conn, %{ status: :processing }
+    json conn, %{ status: :ok }
   end
 end
