@@ -1,5 +1,3 @@
-require IEx
-
 defmodule Morsecipher.QueuePoller do
   use Task
 
@@ -19,12 +17,12 @@ defmodule Morsecipher.QueuePoller do
   end
 
   defp interpret do
-    pid = GenServer.whereis(Morsecipher.Queue)
-    msg = Morsecipher.Queue.pop(pid)
+    list = GenServer.whereis(Morsecipher.Queue)
+           |> Morsecipher.Queue.pop
 
-    case msg do
+    case list do
       nil -> :timer.sleep(@interval)
-      _ -> Morseficator.Adapter.interpret(msg, Morseficator.Adapter.Midi)
+      _ -> Morseficator.Adapter.interpret(list[:text], list[:adapter])
     end
   end
 end

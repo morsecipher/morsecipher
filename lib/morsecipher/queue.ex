@@ -6,8 +6,8 @@ defmodule Morsecipher.Queue do
     GenServer.start_link(__MODULE__, [], name: Morsecipher.Queue)
   end
 
-  def add(pid, text) do
-    GenServer.cast(pid, text)
+  def add(pid, list) do
+    GenServer.cast(pid, list)
   end
 
   def pop(pid) do
@@ -25,8 +25,8 @@ defmodule Morsecipher.Queue do
     {:reply, last, rest}
   end
 
-  def handle_cast(text, queue) do
-    updated_queue = [text|queue]
+  def handle_cast(list, queue) do
+    updated_queue = [list|queue]
     {:noreply, updated_queue}
   end
 end

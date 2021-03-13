@@ -46,7 +46,7 @@ defmodule Morsecipher.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:midi_synth, "~> 0.4.0"},
-      {:morseficator, path: "/home/rrubyist/Development/morseficator"}
+      {:morseficator, git: "git@github.com:rudkovskyi/morseficator.git", branch: "main"}
     ]
   end
 
