@@ -17,12 +17,11 @@ defmodule Morsecipher.QueuePoller do
   end
 
   defp interpret do
-    list = GenServer.whereis(Morsecipher.Queue)
-           |> Morsecipher.Queue.pop
+    next_item = Morsecipher.QueueInterpreter.pop
 
-    case list do
+    case next_item do
       nil -> :timer.sleep(@interval)
-      _ -> Morseficator.Adapter.interpret(list[:text], list[:adapter])
+      _ -> Morseficator.Adapter.interpret(next_item[:text], next_item[:adapter])
     end
   end
 end
