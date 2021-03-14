@@ -11,16 +11,8 @@ defmodule MorsecipherWeb.InterpetorController do
     json conn, %{ status: :ok, text: output }
   end
   def create(conn, params) do
-    GenServer.whereis(Morsecipher.Queue)
-    |> Morsecipher.Queue.add(%{ text: params["text"], adapter: map_adapter(params["adapter"])})
+    Morsecipher.QueueInterpreter.add(%{ text: params["text"], adapter: params["adapter"]})
 
     json conn, %{ status: :ok }
-  end
-
-  defp map_adapter(adapter) do
-    case adapter do
-      "printer" -> Morseficator.Adapter.Printer
-      _ -> Morseficator.Adapter.Midi
-    end
   end
 end

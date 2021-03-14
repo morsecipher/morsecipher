@@ -17,7 +17,7 @@ defmodule Morsecipher.Application do
       MorsecipherWeb.Endpoint,
       # Start a worker by calling: Morsecipher.Worker.start_link(arg)
       # {Morsecipher.Worker, arg}
-      Morsecipher.Queue,
+      Morsecipher.QueueInterpreter,
       Morsecipher.QueuePoller
     ]
 
