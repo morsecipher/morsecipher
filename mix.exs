@@ -46,7 +46,8 @@ defmodule Morsecipher.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:cors_plug, "~> 2.0"},
-      {:morseficator, git: "https://github.com/morsecipher/morseficator.git", branch: "main"}
+      {:morseficator, git: "https://github.com/morsecipher/morseficator.git", branch: "main"},
+      {:tortoise, "~> 0.9.8"}
     ]
   end
 

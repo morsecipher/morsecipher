@@ -32,8 +32,8 @@ defmodule Morsecipher.QueueInterpreter do
 
   defp map_adapter(adapter) do
     case adapter do
-      "printer" -> Morseficator.Adapter.Printer
-      _ -> Morseficator.Adapter.Midi
+      "verbalizer" -> Morsecipher.Verbalizer.Adapter
+      _ -> Morseficator.Adapter.Printer
     end
   end
 

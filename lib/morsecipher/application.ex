@@ -18,7 +18,8 @@ defmodule Morsecipher.Application do
       # Start a worker by calling: Morsecipher.Worker.start_link(arg)
       # {Morsecipher.Worker, arg}
       Morsecipher.QueueInterpreter,
-      Morsecipher.QueuePoller
+      Morsecipher.QueuePoller,
+      Morsecipher.Verbalizer.Server
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
