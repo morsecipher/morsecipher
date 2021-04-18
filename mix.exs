@@ -45,10 +45,8 @@ defmodule Morsecipher.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:midi_synth, "~> 0.4.0"},
       {:cors_plug, "~> 2.0"},
-      {:morseficator, git: "https://github.com/morsecipher/morseficator.git", branch: "extract_midi_adapter"},
-      {:morseficator_adapter_midi, git: "https://github.com/morsecipher/morseficator_adapter_midi.git", branch: "main"}
+      {:morseficator, git: "https://github.com/morsecipher/morseficator.git", branch: "main"}
     ]
   end
 
