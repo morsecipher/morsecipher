@@ -8,7 +8,7 @@ defmodule Morsecipher.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      Morsecipher.Repo,
+      # Morsecipher.Repo,
       # Start the Telemetry supervisor
       MorsecipherWeb.Telemetry,
       # Start the PubSub system
