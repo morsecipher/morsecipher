@@ -1,7 +1,8 @@
 FROM elixir:latest
 
+ENV MIX_ENV=prod
+
 RUN apt-get update && \
-    apt-get install -y libfluidsynth-dev && \
     apt-get install -y inotify-tools && \
     apt-get install -y nodejs && \
     curl -L https://npmjs.org/install.sh | sh && \
