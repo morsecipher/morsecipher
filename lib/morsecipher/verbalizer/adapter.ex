@@ -9,9 +9,10 @@ defmodule Morsecipher.Verbalizer.Adapter do
 
   @spec beep(pid, non_neg_integer()) :: :ok
   def beep(_, times) do
-    :ok = Tortoise.publish(Morsecipher, "morse/msg", "1")
+    {:ok, ref} = Tortoise.publish(Morsecipher, "morse/msg", "1", qos: 2)
     :timer.sleep(@unit*times)
-    :ok = Tortoise.publish(Morsecipher, "morse/msg", "0")
+    {:ok, ref} = Tortoise.publish(Morsecipher, "morse/msg", "0", qos: 2)
+    :ok
   end
 
   @spec sleep(any) :: :ok
