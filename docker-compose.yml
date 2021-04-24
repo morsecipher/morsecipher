@@ -4,6 +4,7 @@ volumes:
   build:
 services:
   mosquitto:
+    container_name: mosquitto
     build: ./config/mosquitto
     image: eclipse-mosquitto
     restart: always
@@ -19,6 +20,7 @@ services:
   web:
     build: .
     command: mix phx.server
+    container_name: morsecipher
     environment: 
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
       - MOSQUITTO_USERNAME=${MOSQUITTO_USERNAME}
