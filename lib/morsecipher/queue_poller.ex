@@ -17,7 +17,7 @@ defmodule Morsecipher.QueuePoller do
   end
 
   defp interpret do
-    next_item = Morsecipher.QueueInterpreter.pop
+    next_item = Morsecipher.QueueInterpreter.pop()
 
     case next_item do
       nil -> :timer.sleep(@interval)
