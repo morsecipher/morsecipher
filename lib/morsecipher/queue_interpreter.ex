@@ -7,7 +7,7 @@ defmodule Morsecipher.QueueInterpreter do
   end
 
   def add(params) do
-    GenServer.cast(pid(), %{ text: params[:text], adapter: map_adapter(params[:adapter]) })
+    GenServer.cast(pid(), %{text: params[:text], adapter: map_adapter(params[:adapter])})
   end
 
   def pop do
@@ -20,20 +20,21 @@ defmodule Morsecipher.QueueInterpreter do
   end
 
   def handle_call(:pop, _from, []), do: {:reply, nil, []}
+
   def handle_call(:pop, _from, queue) do
-    { last, rest } = List.pop_at(queue, -1)
+    {last, rest} = List.pop_at(queue, -1)
     {:reply, last, rest}
   end
 
   def handle_cast(list, queue) do
-    updated_queue = [list|queue]
+    updated_queue = [list | queue]
     {:noreply, updated_queue}
   end
 
   defp map_adapter(adapter) do
     case adapter do
-      "printer" -> Morseficator.Adapter.Printer
-      _ -> Morseficator.Adapter.Midi
+      "verbalizer" -> Morsecipher.Verbalizer.Adapter
+      _ -> Morseficator.Adapter.Printer
     end
   end
 

@@ -3,12 +3,32 @@ volumes:
   node_modules:
   build:
 services:
+  mosquitto:
+    container_name: mosquitto
+    build: ./config/mosquitto
+    image: eclipse-mosquitto
+    restart: always
+    ports:
+      - 1883:1883
+    environment:
+      - MOSQUITTO_USERNAME=${MOSQUITTO_USERNAME}
+      - MOSQUITTO_PASSWORD=${MOSQUITTO_PASSWORD}
+    volumes:
+      - ./config/mosquitto/config:/mosquitto/config
+      - ./config/mosquitto/data:/mosquitto/data
+      - ./config/mosquitto/log:/mosquitto/log
   web:
     build: .
     command: mix phx.server
+    container_name: morsecipher
+    environment: 
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - MOSQUITTO_SERVER=mosquitto
+      - MOSQUITTO_USERNAME=${MOSQUITTO_USERNAME}
+      - MOSQUITTO_PASSWORD=${MOSQUITTO_PASSWORD}
     volumes:
       - .:/app
       - node_modules:/app/assets/node_modules
       - build:/app/_build
     ports:
-      - "4000:4000"
+      - 4000:4000
