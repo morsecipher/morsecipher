@@ -19,7 +19,18 @@ defmodule Morsecipher.Application do
       # {Morsecipher.Worker, arg}
       Morsecipher.QueueInterpreter,
       Morsecipher.QueuePoller,
-      Morsecipher.Verbalizer.Server
+      {
+        Tortoise.Connection,
+        [
+          client_id: Morsecipher,
+          server: {Tortoise.Transport.Tcp, host: System.get_env("MOSQUITTO_SERVER"), port: 1883},
+          user_name: System.get_env("MOSQUITTO_USERNAME"),
+          password: System.get_env("MOSQUITTO_PASSWORD"),
+          handler: {
+            Tortoise.Handler.Logger, []
+          }
+        ]
+      }
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
