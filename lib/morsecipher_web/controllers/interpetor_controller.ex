@@ -12,14 +12,16 @@ defmodule MorsecipherWeb.InterpetorController do
   end
 
   def create(conn, %{"text" => text, "adapter" => adapter}) do
-    {state, msg} = cond do
+    {state, code, msg} = cond do
       String.length(text) > 11 ->
-        {:error, "The message is too long"}
+        {:error, 422, "The message is too long"}
       true ->
         Morsecipher.QueueInterpreter.add(%{text: text, adapter: adapter})
-        {:ok, "Interpreting"}
+        {:ok, 201, "Interpreting"}
     end
 
-    json(conn, %{status: state, msg: msg})
+    conn
+    |> put_status(code)
+    |> json(%{status: state, msg: msg})
   end
 end
